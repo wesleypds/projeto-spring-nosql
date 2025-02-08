@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.wesley.projeto.model.UserDTO;
+import org.wesley.projeto.model.entities.Post;
 import org.wesley.projeto.model.entities.User;
 import org.wesley.projeto.service.UserService;
 
@@ -35,6 +36,12 @@ public class UserController {
     public ResponseEntity<UserDTO> findById(@PathVariable String id) {
         UserDTO user = userService.findById(id);
         return ResponseEntity.ok().body(user);
+    }
+
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User user = userService.findPosts(id);
+        return ResponseEntity.ok().body(user.getPosts());
     }
 
     @PostMapping

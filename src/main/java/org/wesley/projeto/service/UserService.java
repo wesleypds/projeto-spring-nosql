@@ -31,6 +31,12 @@ public class UserService {
         return new UserDTO(user.get());
     }
 
+    public User findPosts(String id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) throw new ObjectNotFoundException("Not found object id: " + id);
+        return user.get();
+    }
+
     public User insert(User obj) {
         obj = userRepository.save(obj);
         return obj;
