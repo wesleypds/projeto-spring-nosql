@@ -1,4 +1,4 @@
-package org.wesley.projeto.model;
+package org.wesley.projeto.model.entities;
 
 import java.io.Serializable;
 
