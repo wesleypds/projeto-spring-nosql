@@ -7,6 +7,7 @@ import java.util.TimeZone;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.wesley.projeto.model.AuthorDTO;
 import org.wesley.projeto.model.entities.Post;
 import org.wesley.projeto.model.entities.User;
 import org.wesley.projeto.repository.PostRepository;
@@ -26,7 +27,7 @@ public class Instantiation implements CommandLineRunner {
 
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         format.setTimeZone(TimeZone.getTimeZone("GMT"));
-        
+
         userRepository.deleteAll();
         postRepository.deleteAll();
 
@@ -36,8 +37,8 @@ public class Instantiation implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(u1, u2, u3));
 
-        Post p1 = new Post(null, format.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo. Abraços!", u1);
-        Post p2 = new Post(null, format.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", u1);
+        Post p1 = new Post(null, format.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(u1));
+        Post p2 = new Post(null, format.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(u1));
 
         postRepository.saveAll(Arrays.asList(p1, p2));
 
