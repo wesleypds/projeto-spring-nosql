@@ -1,5 +1,6 @@
 package org.wesley.projeto.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +35,13 @@ public class PostService {
 
     public List<Post> searchTitle(String text) {
         List<Post> posts = postRepository.searchTitle(text);
+        if (posts.isEmpty()) throw new ObjectNotFoundException("Not found object title: " + text);
+        return posts;
+    }
+
+    public List<Post> searchCriteria(String text, Date min, Date max) {
+        max = new Date(max.getTime() + 24 * 60 * 60 * 1000);
+        List<Post> posts = postRepository.searchCriteria(text, min, max);
         if (posts.isEmpty()) throw new ObjectNotFoundException("Not found object title: " + text);
         return posts;
     }

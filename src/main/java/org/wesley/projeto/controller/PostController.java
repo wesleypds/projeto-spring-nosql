@@ -1,5 +1,6 @@
 package org.wesley.projeto.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,19 @@ public class PostController {
     public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text", defaultValue = "") String text) {
         text = URL.decodeParam(text);
         List<Post> posts = postService.searchTitle(text);
+        return ResponseEntity.ok().body(posts);
+    }
+
+    @GetMapping("/searchcriteria")
+    public ResponseEntity<List<Post>> searchCriteria(
+        @RequestParam(value = "text", defaultValue = "") String text,
+        @RequestParam(value = "dateMin", defaultValue = "") String dateMin,
+        @RequestParam(value = "dateMax", defaultValue = "") String dateMax
+        ) {
+        text = URL.decodeParam(text);
+        Date min = URL.convertDate(dateMin, new Date(0L));
+        Date max = URL.convertDate(dateMax, new Date());
+        List<Post> posts = postService.searchCriteria(text, min, max);
         return ResponseEntity.ok().body(posts);
     }
 
