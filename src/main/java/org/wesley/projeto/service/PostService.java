@@ -1,5 +1,6 @@
 package org.wesley.projeto.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,11 @@ public class PostService {
         Optional<Post> post = postRepository.findById(id);
         if (post.isEmpty()) throw new ObjectNotFoundException("Not found object id: " + id);
         return post.get();
+    }
+
+    public List<Post> findAll() {
+        List<Post> posts = postRepository.findAll();
+        return posts;
     }
 
 }

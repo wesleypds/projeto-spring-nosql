@@ -1,5 +1,7 @@
 package org.wesley.projeto.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,12 @@ public class PostController {
     public ResponseEntity<Post> findById(@PathVariable String id) {
         Post post = postService.findById(id);
         return ResponseEntity.ok().body(post);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Post>> findAll() {
+        List<Post> posts = postService.findAll();
+        return ResponseEntity.ok().body(posts);
     }
 
 }
