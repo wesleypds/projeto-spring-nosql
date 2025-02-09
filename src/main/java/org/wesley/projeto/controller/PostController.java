@@ -13,8 +13,6 @@ import org.wesley.projeto.controller.util.URL;
 import org.wesley.projeto.model.entities.Post;
 import org.wesley.projeto.service.PostService;
 
-import jakarta.websocket.server.PathParam;
-
 @RestController
 @RequestMapping("/posts")
 public class PostController {
@@ -37,7 +35,7 @@ public class PostController {
     @GetMapping("/titlesearch")
     public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text", defaultValue = "") String text) {
         text = URL.decodeParam(text);
-        List<Post> posts = postService.findByTitle(text);
+        List<Post> posts = postService.searchTitle(text);
         return ResponseEntity.ok().body(posts);
     }
 

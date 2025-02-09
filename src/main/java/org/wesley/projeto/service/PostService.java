@@ -32,4 +32,10 @@ public class PostService {
         return posts;
     }
 
+    public List<Post> searchTitle(String text) {
+        List<Post> posts = postRepository.searchTitle(text);
+        if (posts.isEmpty()) throw new ObjectNotFoundException("Not found object title: " + text);
+        return posts;
+    }
+
 }
